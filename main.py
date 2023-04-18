@@ -2,13 +2,32 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from promedioMovil import promedioMovil
+from suavizamientoExpo import suavizado
 
-array = np.array([10, 12, 13, 16, 18, 17, 19, 20, 22, 23, 24, 26, 28, 30])
+#------------------------------------Promedio movil------------------------------------
+data = np.array([10, 15, 13, 17, 20, 19, 22, 24, 23, 25])
+
 tam_ventana = 3
 
-x = promedioMovil(array, tam_ventana)
-y = array
+prediccion = promedioMovil(data, tam_ventana)
 
-plt.plot(x)
-plt.title("Promedio movil")
+plt.plot(data, label='Data')
+plt.plot([None] * (tam_ventana - 1) + prediccion, label='Prediccion')
+plt.legend()
 plt.show()
+#----------------------------------------------------------------------------------------
+
+#------------------------------------Suavizado exponencial------------------------------------
+data = np.array([10, 15, 13, 17, 20, 19, 22, 24, 23, 25])
+
+alpha = 0.3
+
+prediccion = suavizado(data, alpha)
+
+plt.plot(data, label='Data')
+plt.plot(prediccion, label='Prediccion')
+plt.legend()
+plt.show()
+
+
+#----------------------------------------------------------------------------------------
