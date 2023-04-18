@@ -1,16 +1,14 @@
-# This is a sample Python script.
+import numpy as np
+import matplotlib.pyplot as plt
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from promedioMovil import promedioMovil
 
+array = np.array([10, 12, 13, 16, 18, 17, 19, 20, 22, 23, 24, 26, 28, 30])
+tam_ventana = 3
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+x = promedioMovil(array, tam_ventana)
+y = array
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+plt.plot(x)
+plt.title("Promedio movil")
+plt.show()
