@@ -1,15 +1,12 @@
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import csv
 
 from promedioMovil import promedioMovil
 from suavizamientoExpo import suavizado
-from proyeccionTendencia import proyeccionTend
-from analisisMinimosCuadrados import minimosCuadrados
+from suavizadoConTendencia import suavizadoConTendencia
+from minimosCuadrados import minimosCuadrados
 
 array = pd.read_csv('Mobile phone price.csv', header=0, delimiter=',')
-
 print("\n------------------------DATASET------------------------\n")
 print("\nQue datos deseas analizar:\n"
       "1. Storage\n"
@@ -48,8 +45,8 @@ while invalidoDatos:
 
 print("1. Promedio movil\n"
       "2. suavizamiento exponencial\n"
-      "3. Proyeccion de tendencia\n"
-      "4. Regrecion de minimos cuadrados\n"
+      "3. Suavizado con tendencia\n"
+      "4. Minimos cuadrados\n"
       )
 
 metodo = int(input("Ingrese el numero del metodo que desea usar:\n"))
@@ -71,8 +68,7 @@ while invalidoMetodo:
 
     elif metodo == 2:
         # ------------------------------------Suavizado exponencial------------------------------------
-        alpha = float(input("ingrese el valor de alpha que desea utilizar (valores de 0 a 1):\n"))
-        prediccion = suavizado(data, alpha)
+        prediccion = suavizado(data)
 
         plt.plot(data, label='Datos')
         plt.plot(prediccion, label='Prediccion')
@@ -81,23 +77,21 @@ while invalidoMetodo:
         invalidoMetodo = False
 
     elif metodo == 3:
-        # ------------------------------------Proyeccion de tendencia------------------------------------
-        periodos = int(input("ingrese la cantidad de periodos que desea utilizar:\n"))
-        projection = proyeccionTend(data, periodos)
+        # ------------------------------------Suavizado con tendencia------------------------------------
+        proyeccion = suavizadoConTendencia(data)
 
         plt.plot(data, label='Datos')
-        plt.plot([None] * len(data) + projection, label='Proyeccion')
+        plt.plot([None] * len(data) + proyeccion, label='Proyeccion')
         plt.legend()
         plt.show()
         invalidoMetodo = False
 
     elif metodo == 4:
-        # ------------------------------------Regrecion minimos cuadrados------------------------------------
-        periodos = int(input("ingrese la cantidad de periodos que desea utilizar:\n"))
-        projection = minimosCuadrados(data, periodos)
+        # ------------------------------------Minimos cuadrados------------------------------------
+        proyeccion = minimosCuadrados(data)
 
         plt.plot(data, label='Datos')
-        plt.plot([None] * len(data) + projection, label='Proyeccion')
+        plt.plot([None] * len(data) + proyeccion, label='Proyeccion')
         plt.legend()
         plt.show()
         invalidoMetodo = False

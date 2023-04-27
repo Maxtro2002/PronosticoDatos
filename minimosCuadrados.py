@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def minimosCuadrados(data, periodos):
+def minimosCuadrados(data):
+    periodos = 50
     n = len(data)
     x = np.arange(n)
     X = np.vstack([x, np.ones(n)]).T
@@ -13,4 +14,3 @@ def minimosCuadrados(data, periodos):
         projection.append(m*t + b)
 
     return projection
-
